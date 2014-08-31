@@ -65,6 +65,24 @@ def upgrade():
     )
 
     op.create_table(
+        "budget",
+        sa.Column("id", sa.Integer(), nullable=False),
+        sa.Column("name", sa.String(50), nullable=False),
+        sa.Column("limit", sa.Float(), nullable=False),
+        sa.PrimaryKeyConstraint('id')
+    )
+
+    op.create_table(
+        "budget_user",
+        sa.Column("id", sa.Integer(), nullable=False),
+        sa.Column("user_id", sa.Integer(), nullable=False),
+        sa.Column("budget_id", sa.Integer(), nullable=False),
+        sa.ForeignKeyConstraint(['user_id'], ['user.id'], ondelete="CASCADE"),
+        sa.ForeignKeyConstraint(['budget_id'], ['budget.id'], ondelete="CASCADE"),
+        sa.PrimaryKeyConstraint('id')
+    )
+
+    op.create_table(
         "receipt",
         sa.Column("id", sa.Integer(), nullable=False),
         sa.Column("user_id", sa.Integer(), nullable=False),
@@ -80,6 +98,8 @@ def upgrade():
 
 def downgrade():
     op.drop_table("receipt")
+    op.drop_table("budget_user")
+    op.drop_table("budget")
     op.drop_table("store_details")
     op.drop_table("store")
     op.drop_table("store_chain")

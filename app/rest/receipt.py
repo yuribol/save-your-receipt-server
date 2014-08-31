@@ -3,7 +3,7 @@ from flask import Blueprint, jsonify, current_app
 from app.models import User
 from app.database.db import db
 
-class ReceiptBlueprint:
+class BlueprintReceipt:
     bp = Blueprint("receipt", __name__)
     bp_prefix = "/receipt"
 

@@ -62,7 +62,7 @@ def configure_blueprints(app, blueprints):
             print "Please, verify if each blueprint setup is either a string or a tuple."
             exit(1)
 
-        blueprint = __import_variable("app.rest", "receipt", blueprint)
+        blueprint = __import_variable("app", "rest", blueprint)
         app.register_blueprint(blueprint.bp, url_prefix="/v1" + blueprint.bp_prefix)
 
 def configure_database(app):
