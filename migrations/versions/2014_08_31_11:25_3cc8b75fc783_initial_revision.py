@@ -69,6 +69,8 @@ def upgrade():
         sa.Column("id", sa.Integer(), nullable=False),
         sa.Column("name", sa.String(50), nullable=False),
         sa.Column("limit", sa.Float(), nullable=False),
+        sa.Column("created", sa.DateTime(), default=datetime.datetime.utcnow()),
+        sa.Column("status", sa.Integer(), nullable=False),
         sa.PrimaryKeyConstraint('id')
     )
 
